@@ -49,6 +49,7 @@ console.log(`Address : ${a} her Id : ${i}`);
 
 const User = function() {
     let name = '';
+    let changes =[];
     Object.defineProperties(this, {
        id : {
         value : `UID-${parseInt(Math.random() * 100000)}`,
@@ -56,18 +57,28 @@ const User = function() {
        },
        name : {
         enumerable : true,
-        configurable : true, /// get accesser methods only enumerable and configarable can be used 
+        // configurable : true, /// get accesser methods only enumerable and configarable can be used 
         get() {
           return name;
         },
         set(val) {
+            changes.push(`Name changed : ${val}`);
             name = val
+        },
+       },
+       changes : {
+        enumerable : false,
+        get () {
+            return changes;
         }
        }
      });
 };
 
 const shreya = new User();
-shreya.name = "Shreya"
+shreya.name = "Shreya Ray"
+
+
 console.log(`id : ${shreya.id}`)
 console.log(`Name : ${shreya.name}`)
+console.log(shreya.changes);
